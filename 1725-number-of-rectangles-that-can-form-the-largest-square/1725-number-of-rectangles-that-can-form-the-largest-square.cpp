@@ -13,6 +13,8 @@ public:
         {
             if(v[i]==m)
                 c++;
+            else
+                break;
         }
         return c;
     }
