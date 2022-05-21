@@ -23,6 +23,14 @@ int main() {
 
 
 pair<long long, long long> getMinMax(long long a[], int n) {
-    sort(a,a+n);
-    return make_pair(a[0],a[n-1]);
+    long long mi=a[0]>a[1] ? a[1] : a[0];
+    long long ma=a[0]<a[1] ? a[1] : a[0];
+    for(long long i=2;i<n;i++)
+    {
+        if(a[i]<mi)
+        mi=a[i];
+        if(a[i]>ma)
+        ma=a[i];
+    }
+     return make_pair(mi,ma);
 }
