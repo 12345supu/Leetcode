@@ -6,7 +6,7 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 public:
-    vector<int> findTwoElement(int *arr, int n) {
+       vector<int> findTwoElement(int *arr, int n) {
         int a,b;
         sort(arr,arr+n);
         // for(int i=0;i<n;i++)
