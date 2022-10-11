@@ -12,15 +12,17 @@ class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
         ListNode* curr = head;
-        int c=0;
-        while(curr != NULL)
+        int c = 0;
+        while(head != NULL)
         {
             c++;
-            curr = curr -> next;
-        }
-        c /= 2;
-        for(int i=0;i<c;i++)
+            if(c == 2)
+            {
+                c = 0;
+                curr = curr->next;
+            }    
             head = head -> next;
-        return head;
+        }
+        return curr;
     }
 };
