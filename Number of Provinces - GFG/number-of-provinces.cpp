@@ -8,29 +8,42 @@ using namespace std;
 
 class Solution {
   public:
-    void DFS(vector<vector<int>> adj, int s, bool visited[], int V)
+    void dfs(int u, vector<int> ad[],bool vis[])
     {
-        visited[s] = true;
-        for(int i = 0; i < V; i++)
+        vis[u] = true;
+        for(auto v : ad[u])
         {
-            if(adj[s][i] == 1 && visited[i] == false)
-            {
-                DFS(adj, i, visited, V);
-            }
+            if(!vis[v])
+            dfs(v, ad, vis);
         }
     }
     int numProvinces(vector<vector<int>> adj, int V) {
-        int ans = 0;
-        bool visited[V] = {false};
+        
+        vector<int> ad[V];
         for(int i = 0; i < V; i++)
         {
-            if(visited[i] == false)
+            for(int j = 0; j < V; j++)
             {
-                DFS(adj, i, visited, V);
-                ans++;
+                if(adj[i][j] == 1 && i != j)
+                {
+                    ad[i].push_back(j);
+                    ad[j].push_back(i);
+                }
+                
             }
         }
-        return ans;
+        int c=0;
+        bool vis[V] = {false};
+        for(int i = 0; i < V; i++)
+        {
+            if(!vis[i])
+            {
+                c++;
+                dfs(i,ad,vis);
+                
+            }
+        }
+        return c;
         // code here
     }
 };
