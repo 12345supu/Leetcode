@@ -41,7 +41,7 @@ class Solution
 	        {
 	            int nr = r + dr[i];
 	            int nc = c + dc[i];
-	            if(nr >= 0 && nr < n && nc >= 0 && nc < m && vis[nr][nc] == false)
+	            if(nr >= 0 && nr < n && nc >= 0 && nc < m && !vis[nr][nc])
 	            {
 	                vis[nr][nc] = true;
 	                q.push({{nr,nc},d+1});
