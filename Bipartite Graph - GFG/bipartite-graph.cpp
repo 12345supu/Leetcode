@@ -5,25 +5,17 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-    bool check(int s, int V, vector<int>adj[], int color[])
+    bool dfscheck(int s, int c, vector<int> adj[], int color[])
     {
-        color[s] = 0;
-        queue<int> q;
-        q.push(s);
-        while(!q.empty())
+        color[s] = c;
+        for(auto v : adj[s])
         {
-            int u = q.front();
-            q.pop();
-            for(auto v : adj[u])
+            if(color[v] == -1)
             {
-                if(color[v] == -1)
-                {
-                    color[v] = !color[u];
-                    q.push(v);
-                }
-                else if(color[v] == color[u])
-                    return false;
+                if(dfscheck(v, !c, adj, color) == false) return false;
             }
+            else if(color[v] == c)
+                return false;
         }
         return true;
     }
@@ -37,7 +29,7 @@ public:
 	    {
 	        if(color[i] == -1)
 	        {
-	            if(check(i, V, adj, color) == false)
+	            if(dfscheck(i, 0, adj, color) == false)
 	                return false;
 	        }
 	    }
