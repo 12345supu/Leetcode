@@ -10,32 +10,37 @@ using namespace std;
 
 class Solution {
   public:
-    bool check(int u, vector<int> adj[], int vis[], int pathVis[])
-    {
-        vis[u] = 1;
-        pathVis[u] = 1;
-        for(auto v : adj[u])
-        {
-            if(!vis[v])
-            {
-                if(check(v, adj, vis, pathVis) == true)
-                    return true;
-            }
-            else if(pathVis[v])
-                return true;
-        }
-        pathVis[u] = 0;
-        return false;
-    }
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
         vector<int> ans;
-        int vis[V] = {0};
-        int pathVis[V] = {0};
+        vector<int> revAdj[V];
+        int indegree[V] = {0};
         for(int i = 0; i < V; i++)
         {
-            if(check(i, adj, vis, pathVis) == false)
-                ans.push_back(i);
+            for(auto v : adj[i])
+            {
+                revAdj[v].push_back(i);
+                indegree[i]++;
+            }
         }
+        queue<int> q;
+        for(int i = 0; i < V; i++)
+        {
+            if(indegree[i] == 0)
+                q.push(i);
+        }
+        while(!q.empty())
+        {
+            int u = q.front();
+            q.pop();
+            ans.push_back(u);
+            for(auto v : revAdj[u])
+            {
+                indegree[v]--;
+                if(indegree[v] == 0)
+                    q.push(v);
+            }
+        }
+        sort(ans.begin(),ans.end());
         return ans;
         // code here
     }
