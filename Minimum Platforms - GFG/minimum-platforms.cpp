@@ -14,7 +14,7 @@ class Solution{
     {
         sort(arr,arr + n);
         sort(dep,dep + n);
-        int p = 1, mx = 1, j = 0, i = 1;
+        int p = 1, mx = 1, j = 0;
         for(int i = 1; i < n; i++)
         {
             if(arr[i] <= dep[j])
